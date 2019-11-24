@@ -1,0 +1,57 @@
+
+{
+  "log": {
+      // By default, V2Ray writes access log to stdout.
+      "access": "./access",
+  
+      // By default, V2Ray write error log to stdout.
+      "error": "error",
+  
+      // Log level, one of "debug", "info", "warning", "error", "none"
+      "loglevel": "debug"
+    },
+
+  "inbounds": [
+    {
+      "port": 1080,
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      },
+      "settings": {
+        "auth": "noauth"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "####ip####",
+            "port": 50877,
+            "users": [
+              {
+                "id": "####id####",
+                "alterId": 64
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "mkcp",
+        "kcpSettings": {
+          "uplinkCapacity": 5,
+          "downlinkCapacity": 100,
+          "congestion": true,
+          "header": {
+            "type": "none"
+          }
+        }
+      }
+    }
+  ]
+}

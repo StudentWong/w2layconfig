@@ -1,0 +1,2 @@
+
+nohup ./v2ray --config=configserver.json > ./v2raylog.file 2>&1 &

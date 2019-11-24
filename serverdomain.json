@@ -1,0 +1,54 @@
+{
+  "log": {
+      // By default, V2Ray writes access log to stdout.
+      "access": "./access",
+      //            By default, V2Ray write error log to stdout.
+      "error": "./error",
+
+      // Log level, one of "debug", "info", "warning", "error", "none"
+      "loglevel": "debug"
+    },
+                                 
+  "inbounds": [
+    {
+      "port": 29616,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "####id####",
+            "level": 1,
+	    "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+	"wsSettings": {
+	 "path": "/root/v2ray",
+	 "headers": {}
+	},
+        "network": "ws"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ],
+  "routing": {
+   "rules": [
+    {
+      "type": "field",
+      "ip": ["geoip:private"],
+      "outboundTag": "blocked"
+    }
+   ]
+  }
+}
